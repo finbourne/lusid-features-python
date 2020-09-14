@@ -25,7 +25,7 @@ pip install lusidfeature
 This repository has two main functions that need to be imported for the scanner to work
 
 1. lusid_feature in lusid_feature.py - The decorator used with functions and methods
-2. extract_features_to_file(argv) in entrypoint - The function that extracts all decorator values and writes them to a file
+2. extract_features_to_file(argv) in reporter - The function that extracts all decorator values and writes them to a file
 
 ### Implementing `lusid_feature` decorator
 
@@ -63,7 +63,7 @@ def some_other_function():
 To extract the feature values and write them to a file, the following function must be imported and run from a main function in a main.py file:
 
 ```
-from lusidfeature.entrypoint import extract_features_to_file
+from lusidfeature.reporter import extract_features_to_file
 
 def main(argv):
     extract_features_to_file(argv)
@@ -124,7 +124,7 @@ _Windows_:
 
 _Unix (Mac/Linux)_:
 ```
--r home\lusid-sdk-python\sdk
+-r home/lusid-sdk-python/sdk
 ```
 
 To run, set your PYTHONPATH for the required folders and run the following example in a similar way:

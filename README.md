@@ -8,8 +8,8 @@ This repository contains source code which provides a python decorator called 'l
 within a python project to scan through all 'lusid_feature' decorator values in a desired project package. The runner
 will then produce an output text file of desired name and path with all lusid_feature codes.
 
-The generated text file is then passed into a [lusid-feature-reporter](https://gitlab.finbourne.com/salesengineering/lusid-features)
-python script, which maps the feature codes to full feature names configured in the reporter's features.yaml file.
+The generated text file is then passed into a Lusid feature reporter python script, which maps the feature codes to 
+full feature names and their implementation status, ultimately creating a visual features report across all Lusid SDKs.
 
 ## Usage
 
@@ -27,12 +27,12 @@ This repository has two main functions that need to be imported for the scanner 
 1. lusid_feature in lusid_feature.py - The decorator used with functions and methods
 2. extract_features_to_file(argv) in entrypoint - The function that extracts all decorator values and writes them to a file
 
-### Implementing lusid_feature decorator
+### Implementing `lusid_feature` decorator
 
 When successfully imported, lusid_feature decorator can be used to decorate functions and methods in the following manner: 
 
 ```
-from lusidfeature.lusid_feature import lusid_feature
+from lusidfeature import lusid_feature
 
 @lusid_feature("F1")
 def some_function():

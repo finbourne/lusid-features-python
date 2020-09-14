@@ -1,3 +1,5 @@
+![LUSID_by_Finbourne](https://content.finbourne.com/LUSID_repo.png)
+
 # Lusid Feature Python Decorator Scanner
 
 ## Description
@@ -6,13 +8,16 @@ This repository contains source code which provides a python decorator called 'l
 within a python project to scan through all 'lusid_feature' decorator values in a desired project package. The runner
 will then produce an output text file of desired name and path with all lusid_feature codes.
 
+The generated text file is then passed into a [lusid-feature-reporter](https://gitlab.finbourne.com/salesengineering/lusid-features)
+python script, which maps the feature codes to full feature names configured in the reporter's features.yaml file.
+
 ## Usage
 
 ### Installing
 
 Run:
 ```
-pip install lusidfeatures
+pip install lusidfeature
 ```
 
 ### Importing
@@ -20,49 +25,48 @@ pip install lusidfeatures
 This repository has two main functions that need to be imported for the scanner to work
 
 1. lusid_feature in lusid_feature.py - The decorator used with functions and methods
-2. get_features_file(argv) in entrypoint - The function that extracts all decorator values and writes them to a file
-
-lusid_feature example import:
-```
-from lusidfeatures.lusid_feature import lusid_feature
-```
-
-get_features_file(argv) example import:
-```
-from lusidfeatures.entrypoint import get_features_file
-```
+2. extract_features_to_file(argv) in entrypoint - The function that extracts all decorator values and writes them to a file
 
 ### Implementing lusid_feature decorator
 
 When successfully imported, lusid_feature decorator can be used to decorate functions and methods in the following manner: 
 
 ```
+from lusidfeature.lusid_feature import lusid_feature
+
 @lusid_feature("F1")
 def some_function():
-    # function/method implementation
+    pass # function/method implementation
 ```
 
 Rules around using lusid_feature decorator:
-- The decorator must always be called with brackets, and have a string value passed. Correct: ```@lusid_feature("F1")``` Wrong:```@lusid_feature```
-- The decorator must not have an empty string passed. The following will throw an error: ```@lusid_feature("")```
-- The decorator must not have duplicate feature values across the package files that are being scanned. The following with throw an error:
+- The decorator must always be called with brackets, and have a string value passed. 
+Correct Usage: ```@lusid_feature("F1")``` 
+Incorrect Usage:```@lusid_feature```
+- The decorator must not have an empty string passed. The following will throw an error: 
+```@lusid_feature("")```
+- The decorator must not have duplicate feature values across the package files that are being scanned. 
+The following will throw an error if both functions/methods with the same feature codes are found in the same package:
 ```
 @lusid_feature("F1")
 def some_function():
-    # function/method implementation
+    pass # function/method implementation
 
 @lusid_feature("F1")
 def some_other_function():
-    # function/method implementation
+    pass # function/method implementation
 ```
-- The decorator value should start with a capital 'F'
+
+
 ### Running the decorator scanner
 
 To extract the feature values and write them to a file, the following function must be imported and run from a main function in a main.py file:
 
 ```
+from lusidfeature.entrypoint import extract_features_to_file
+
 def main(argv):
-    get_features_file(argv)
+    extract_features_to_file(argv)
 
 
 if __name__ == "__main__":
@@ -70,7 +74,8 @@ if __name__ == "__main__":
 
 ```
 
-the **sys.argv** input variable should be passed as multiple parameters from the command line, which will be later parsed with argparser
+The reason we must use 'if __name__ == "__main__"' with an entry main function is because the decorator scanner 
+must be run directly, together with strictly required "project package name" and "output file path" parameters.
 
 
 ### Input parameters (sys.argv)
@@ -78,16 +83,30 @@ the **sys.argv** input variable should be passed as multiple parameters from the
 The command line requires two parameters
 
 - --outpath or -o
-This is the directory and filename of where the features text file should be written
-Example:
+This is the full qualified filename of where to create the output file
+
+Examples:
+
+_Windows_:
+```
+-o <your-absolute-path>\<your-filename>.txt
+
+-o C:\\home\src\output\features.txt
+```
+
+_Unix (Mac/Linux)_:
 ```
 -o <your-absolute-path>/<your-filename>.txt
+
+-o home/src/output/features.txt
 ```
 - --package or -p
 This is the package that the decorator scanner should look for decorators in
-Example:
+Examples:
 ```
--p <package>.<packagenext>.<packagenext>
+-p lusid.submodule
+-p lusid.submodule.anothersubmodule
+-p tests.tutorials
 ```
 
 To run, set your PYTHONPATH for the required folders and run the following example in a similar way:

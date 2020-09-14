@@ -9,7 +9,7 @@ class FeaturesTempFileManager:
     @staticmethod
     def create_temp_file(data):
         """
-        Creates a temporary file from extracted lusidfeatures which is written to the file as a text file
+        Creates a temporary file from extracted lusidfeature which is written to the file as a text file
         :param str data: The data is passed as a text string and saved to the temp file
         :return: tempfile.NamedTemporaryFile features_file: The temporary file
         """

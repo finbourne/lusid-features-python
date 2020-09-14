@@ -2,7 +2,7 @@ import importlib
 import inspect
 import pkgutil
 
-from lusidfeatures.get_project_root import get_project_root
+from lusidfeature.get_project_root import get_project_root
 
 
 def validate_feature_list(feature_list):

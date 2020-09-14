@@ -1,6 +1,6 @@
 import unittest
 
-from lusidfeatures.feature_extractor import extract_all_features_from_package
+from lusidfeature.feature_extractor import extract_all_features_from_package
 
 
 class FeatureExtractorTests(unittest.TestCase):

@@ -1,10 +1,10 @@
 import argparse
 
-from lusidfeatures.feature_extractor import extract_all_features_from_package
-from lusidfeatures.feature_file_writer import write_features_to_file
+from lusidfeature.feature_extractor import extract_all_features_from_package
+from lusidfeature.feature_file_writer import write_features_to_file
 
 
-def get_features_file(argv):
+def extract_features_to_file(argv):
     ap = argparse.ArgumentParser(description="Get arguments from command line")
     ap.add_argument('-p', '--package', required=True, help='package name from the root folder sdk, not including the '
                                                            'root folder. Eg if root folder is "sdk", then package name '

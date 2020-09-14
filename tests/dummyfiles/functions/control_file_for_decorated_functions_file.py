@@ -1,4 +1,4 @@
-from lusidfeatures.lusid_feature import lusid_feature
+from lusidfeature.lusid_feature import lusid_feature
 
 
 @lusid_feature("F2")

@@ -1,5 +1,5 @@
 import unittest
-from lusidfeatures.lusid_feature import lusid_feature
+from lusidfeature.lusid_feature import lusid_feature
 
 
 class AnotherClassWithValidDecoratorsOnMethods(unittest.TestCase):

@@ -2,7 +2,7 @@ import unittest
 
 from parameterized import parameterized
 
-from lusidfeatures.lusid_feature import lusid_feature
+from lusidfeature.lusid_feature import lusid_feature
 
 
 class ControlMultidecoratorClass(unittest.TestCase):

@@ -1,7 +1,7 @@
 import unittest
 
-from lusidfeatures.feature_extractor import extract_all_features_from_package
-from lusidfeatures.features_temp_file_manager import FeaturesTempFileManager
+from lusidfeature.feature_extractor import extract_all_features_from_package
+from lusidfeature.features_temp_file_manager import FeaturesTempFileManager
 
 
 class FeatureFileWriterTests(unittest.TestCase):

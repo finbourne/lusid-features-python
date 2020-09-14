@@ -1,10 +1,10 @@
-# lusid-features-python
-=======
-# Lusid Feature Decorator Scanner
+# Lusid Feature Python Decorator Scanner
 
 ## Description
 
-This repository contains source code which provides a python decorator called 'lusid_feature', dasdf
+This repository contains source code which provides a python decorator called 'lusid_feature', which can then be used
+within a python project to scan through all 'lusid_feature' decorator values in a desired project package. The runner
+will then produce an output text file of desired name and path with all lusid_feature codes.
 
 ## Usage
 

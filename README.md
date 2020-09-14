@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ![LUSID_by_Finbourne](https://content.finbourne.com/LUSID_repo.png)
 
 # Lusid Feature Python Decorator Scanner

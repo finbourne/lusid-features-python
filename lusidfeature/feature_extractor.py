@@ -42,10 +42,10 @@ def extract_all_features_from_package(package_name):
         module = importlib.import_module(name)
 
         for feature_code in get_decorator_values_from_classes(module):
-            feature_list.append(feature_code.upper())
+            feature_list.append(feature_code)
 
         for feature_code in get_decorator_values_from_functions(module):
-            feature_list.append(feature_code.upper())
+            feature_list.append(feature_code)
 
     validate_feature_list(feature_list)
     return feature_list

@@ -75,14 +75,15 @@ if __name__ == "__main__":
 ```
 
 The reason we must use 'if __name__ == "__main__"' with an entry main function is because the decorator scanner 
-must be run directly, together with strictly required "project package name" and "output file path" parameters.
+must be run directly, together with strictly required "root project directory", "project package name" 
+and "output file path" parameters.
 
 
 ### Input parameters (sys.argv)
 
 The command line requires two parameters
 
-- --outpath or -o
+- --outpath or -o <br>
 This is the full qualified filename of where to create the output file
 
 Examples:
@@ -100,13 +101,30 @@ _Unix (Mac/Linux)_:
 
 -o home/src/output/features.txt
 ```
-- --package or -p
+- --package or -p <br>
 This is the package that the decorator scanner should look for decorators in
 Examples:
 ```
 -p lusid.submodule
 -p lusid.submodule.anothersubmodule
 -p tests.tutorials
+```
+
+- --root or -r <br>
+The path of root directory from which the decorator scanner should start traversing packages and modules. 
+The path must point to a directory within the project folder, and not to a directory outside the project. 
+(Recommended to be the root SDK folder or src folder rather than the base project path.)
+
+Examples:
+
+_Windows_:
+```
+-r C:\\home\lusid-sdk-python\sdk
+```
+
+_Unix (Mac/Linux)_:
+```
+-r home\lusid-sdk-python\sdk
 ```
 
 To run, set your PYTHONPATH for the required folders and run the following example in a similar way:

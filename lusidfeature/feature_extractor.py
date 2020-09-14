@@ -32,8 +32,7 @@ def get_decorator_values_from_functions(module):
             yield function.decorator_value
 
 
-def extract_all_features_from_package(package_name):
-    root = get_project_root()
+def extract_all_features_from_package(package_name, root):
     feature_list = []
     for importer, name, is_pkg in pkgutil.walk_packages([root]):
         if is_pkg or not name.startswith(package_name):

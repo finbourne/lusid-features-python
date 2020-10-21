@@ -40,11 +40,10 @@ class FeatureExtractorTests(unittest.TestCase):
     def test_if_throws_error_on_no_input_decorators(self):
         package = "tests.dummyfiles.noinput"
 
-        with self.assertRaises(Exception) as context:
+        with self.assertRaises(ValueError) as context:
             extract_all_features_from_package(package, get_project_root())
 
-        self.assertTrue("lusid_feature() missing 1 required positional argument: 'feature_code'" in str(
-            context.exception))
+        self.assertTrue("lusid_feature error: Decorator requires at least some input." in str(context.exception))
 
     def test_if_returns_empty_list_with_no_annotations(self):
         package = "tests.dummyfiles.notannotated"
@@ -80,3 +79,40 @@ class FeatureExtractorTests(unittest.TestCase):
         feature_list_from_functions = extract_all_features_from_package(package, get_project_root())
 
         self.assertEqual(set(expected_features), set(feature_list_from_functions))
+
+    def test_if_returns_correct_codes_with_multiple_decorator_inputs_in_module(self):
+        package = "tests.dummyfiles.multiplevalues.methods_containing_decorators_with_multiple_values"
+        expected_features = ["F1", "F2", "F5", "F6", "F7", "F8"]
+
+        feature_list_from_functions = extract_all_features_from_package(package, get_project_root())
+
+        self.assertEqual(set(expected_features), set(feature_list_from_functions))
+
+    def test_if_returns_correct_codes_with_multiple_decorator_inputs_in_package(self):
+        package = "tests.dummyfiles.multiplevalues"
+        expected_features = ["F1", "F2", "F3", "F4", "F5", "F6", "F7", "F8"]
+
+        feature_list_from_functions = extract_all_features_from_package(package, get_project_root())
+
+        self.assertEqual(set(expected_features), set(feature_list_from_functions))
+
+    def test_if_throws_error_on_duplicate_multiple_decorator_input(self):
+        package = "tests.dummyfiles.errorsmultiplevalues.methods_containing_decorators_with_duplicate_multiple_values"
+        expected_duplicate = "F8"
+
+        with self.assertRaises(Exception) as context:
+            extract_all_features_from_package(package, get_project_root())
+
+        self.assertTrue(f"lusid_feature error: Feature code \"{expected_duplicate}\" is a duplicate." in str(
+            context.exception))
+
+    def test_if_throws_error_on_multiple_decorator_input_having_empty_values(self):
+        package = "tests.dummyfiles.errorsmultiplevalues.methods_containing_multivalue_decorators_with_empty_strings"
+
+        with self.assertRaises(Exception) as context:
+            extract_all_features_from_package(package, get_project_root())
+
+        self.assertTrue("lusid_feature error: Some decorated methods have no value passed. "
+                        "Please make sure each lusid_feature decorator has a value code passed." in str(
+            context.exception))
+

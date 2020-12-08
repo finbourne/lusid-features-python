@@ -152,7 +152,7 @@ etc...
 
 ## Limitations
 
-### Using lusid_feature with 'parameterized' decorator
+### Using lusid_feature with parameter injecting decorators (eg. parameterized)
 
 When using `parameterized` package, or any other decorator that injects arguments into a function/method, 
 then the `lusid_feature` decorator must be on **top** of the other decorator 

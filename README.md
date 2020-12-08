@@ -40,8 +40,8 @@ def some_function():
 ```
 
 Rules around using lusid_feature decorator:
-- The decorator must always be called with brackets, and have a string value passed. 
-Correct Usage: ```@lusid_feature("F1")``` 
+- The decorator must always be called with brackets, and have a string value passed. It can optionally contain multiple values.
+Correct Usage: ```@lusid_feature("F1") or @lusid_feature("F1", "F2")``` 
 Incorrect Usage:```@lusid_feature```
 - The decorator must not have an empty string passed. The following will throw an error: 
 ```@lusid_feature("")```
@@ -148,4 +148,53 @@ F10
 F11
 F8
 etc...
+```
+
+## Limitations
+
+### Using lusid_feature with 'parameterized' decorator
+
+When using `parameterized` package, or any other decorator that injects arguments into a function/method, 
+then the `lusid_feature` decorator must be on **top** of the other decorator 
+
+Correct usage:
+
+```
+@lusid_feature("F2", "F5", "F6")
+@parameterized.expand(
+    [
+        ("test1", 1),
+        ("test2", 2)
+    ]
+)
+def test_dummy_method_2(cls, test1, test2):
+    pass  # Empty for testing purposes
+
+```
+
+Incorrect usage:
+```    
+@parameterized.expand(
+    [
+        ("test1", 1),
+        ("test2", 2)
+    ]
+)
+@lusid_feature("F2", "F5", "F6")
+def test_dummy_method_2(cls, test1, test2):
+    pass  # Empty for testing purposes
+```
+
+
+### Stacking decorators
+
+Decorator stacking for lusid_feature is not supported at the moment. The following will NOT yield expected results.
+
+Incorrect usage:
+
+```
+@lusid_feature("F1")
+@lusid_feature("F2")
+def some_function():
+    pass # function/method implementation
 ```

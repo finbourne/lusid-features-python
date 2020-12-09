@@ -12,7 +12,7 @@ def lusid_feature(*feature_codes):
 
     def wrap_method(decorated_method):
         def get_decorated_method(*decorated_method_args):
-            return decorated_method(*decorated_method_args)
+            return decorated_method
         get_decorated_method.decorator_value = list(feature_codes)  # <-- store the feature
         return get_decorated_method
 

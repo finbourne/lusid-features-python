@@ -8,7 +8,7 @@ def readme():
 
 setup(
     name='lusidfeature',
-    version='0.2.0',
+    version='0.2.1',
     description='This package will allow to run the main file and retrieve a list of decorated feature methods in a cls',
     long_description=readme(),
     long_description_content_type='text/markdown',

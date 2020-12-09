@@ -96,6 +96,14 @@ class FeatureExtractorTests(unittest.TestCase):
 
         self.assertEqual(set(expected_features), set(feature_list_from_functions))
 
+    def test_if_returns_correct_codes_with_inherited_classes_in_file(self):
+        package = "tests.dummyfiles.classinheritance"
+        expected_features = ["F1", "F2", "F3", "F4", "F5"]
+
+        feature_list_from_functions = extract_all_features_from_package(package, get_project_root())
+
+        self.assertEqual(set(expected_features), set(feature_list_from_functions))
+
     def test_if_throws_error_on_duplicate_multiple_decorator_input(self):
         package = "tests.dummyfiles.errorsmultiplevalues.methods_containing_decorators_with_duplicate_multiple_values"
         expected_duplicate = "F8"

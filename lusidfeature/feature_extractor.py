@@ -19,8 +19,9 @@ def validate_feature_list(feature_list):
 def get_decorator_values_from_classes(module):
     classes = inspect.getmembers(module, predicate=inspect.isclass)
     for cls_name, cls in classes:
-        methods = inspect.getmembers(cls)
-        for method_name, method in methods:  # Using method option as sourcecode parsing parses comments
+        # get all class methods that are not inherited. Avoids duplicate extraction
+        methods = [(n, m) for (n, m) in cls.__dict__.items() if callable(m)]
+        for method_name, method in methods:
             if hasattr(method, "decorator_value"):
                 yield method.decorator_value
 

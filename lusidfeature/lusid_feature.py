@@ -1,3 +1,7 @@
+import inspect
+from functools import wraps
+
+
 def lusid_feature(*feature_codes):
     if len(feature_codes) < 1:
         raise ValueError("lusid_feature error: Decorator requires at least some input.")
@@ -10,13 +14,15 @@ def lusid_feature(*feature_codes):
             raise ValueError("lusid_feature error: Some decorated methods have no value passed. "
                              "Please make sure each lusid_feature decorator has a value code passed.")
 
-    def wrap_method(decorated_method):
-        def get_decorated_method(*decorated_method_args):
-            return decorated_method
-        get_decorated_method.decorator_value = list(feature_codes)  # <-- store the feature
-        return get_decorated_method
+    def decorator(decorated_method):
+        if decorated_method is None:
+            return
 
-    return wrap_method
+        @wraps(decorated_method)
+        def wrapper(*method_args, **kwargs):
+            return decorated_method(*method_args, **kwargs)
 
+        wrapper.decorator_value = list(feature_codes)  # <-- store the feature
+        return wrapper
 
-
+    return decorator

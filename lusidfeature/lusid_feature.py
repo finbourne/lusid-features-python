@@ -14,14 +14,15 @@ def lusid_feature(*feature_codes):
                              "Please make sure each lusid_feature decorator has a value code passed.")
 
     def decorator(decorated_method):
-        if decorated_method is None:
-            return
 
         @wraps(decorated_method)
         def wrapper(*method_args, **kwargs):
+            if decorated_method is None:
+                return None
             return decorated_method(*method_args, **kwargs)
 
         wrapper.decorator_value = list(feature_codes)  # <-- store the feature
+
         return wrapper
 
     return decorator

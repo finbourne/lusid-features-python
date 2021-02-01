@@ -74,7 +74,7 @@ class FeatureExtractorTests(unittest.TestCase):
 
     def test_if_returns_correct_codes_with_multiple_decorators(self):
         package = "tests.dummyfiles.multidecorator"
-        expected_features = ["F1", "F2", "F3", "F4"]
+        expected_features = ["F1", "F2", "F3", "F4", "F5", "F6"]
 
         feature_list_from_functions = extract_all_features_from_package(package, get_project_root())
 

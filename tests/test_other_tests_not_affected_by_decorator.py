@@ -13,6 +13,10 @@ class TestWhetherOtherTestsAreAffectedByDecorator(unittest.TestCase):
         # skip test_control_method
         if self._testMethodName == "test_control_method":
             self.should_be_true = True
+        # Skip the empty definition of "test_method_with_decorator_on_top". Only care for
+        # Only care for test_method_with_decorator_on_top_0_test1, and ..._1_test2
+        if self._testMethodName == "test_method_with_decorator_on_top":
+            self.should_be_true = True
         else:
             self.should_be_true = False
 
@@ -33,6 +37,7 @@ class TestWhetherOtherTestsAreAffectedByDecorator(unittest.TestCase):
     )
     def test_method_with_decorator_on_top(cls, test1, test2):
         print(f"inside {cls._testMethodName}")
+        print(f"Test name is {test1}")
         cls.should_be_true = True
         cls.assertEqual(type(test1), str)
         cls.assertEqual(type(test2), int)
@@ -52,6 +57,7 @@ class TestWhetherOtherTestsAreAffectedByDecorator(unittest.TestCase):
     @lusid_feature("F5")  # This should never happen though
     def test_method_with_decorator_on_bottom(self, test1, test2):
         print(f"inside {self._testMethodName}")
+        print(f"Test name is {test1}")
         self.should_be_true = True
         self.assertEqual(type(test1), str)
         self.assertEqual(type(test2), int)

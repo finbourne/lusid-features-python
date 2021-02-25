@@ -16,17 +16,6 @@ class FeatureExtractorTests(unittest.TestCase):
         self.assertEqual(len(feature_list_from_function), 4)
         self.assertEqual(expected_set, actual_set)
 
-    def test_if_throws_error_on_duplicate_decorators(self):
-        package = "tests.dummyfiles.duplicates"
-        expected_duplicate = "F1"
-
-        with self.assertRaises(Exception) as context:
-            extract_all_features_from_package(package, get_project_root())
-
-        self.assertTrue(f'lusid_feature error: Feature code "{expected_duplicate}" is a duplicate. '
-                        'Please make sure each feature code is unique. Also make sure lusid_feature '
-                        'decorator is on top of any other decorators for that function/method.' in str(context.exception))
-
     def test_if_throws_error_on_empty_string_value_decorators(self):
         package = "tests.dummyfiles.empties"
 
@@ -103,16 +92,6 @@ class FeatureExtractorTests(unittest.TestCase):
         feature_list_from_functions = extract_all_features_from_package(package, get_project_root())
 
         self.assertEqual(set(expected_features), set(feature_list_from_functions))
-
-    def test_if_throws_error_on_duplicate_multiple_decorator_input(self):
-        package = "tests.dummyfiles.errorsmultiplevalues.methods_containing_decorators_with_duplicate_multiple_values"
-        expected_duplicate = "F8"
-
-        with self.assertRaises(Exception) as context:
-            extract_all_features_from_package(package, get_project_root())
-
-        self.assertTrue(f"lusid_feature error: Feature code \"{expected_duplicate}\" is a duplicate." in str(
-            context.exception))
 
     def test_if_throws_error_on_multiple_decorator_input_having_empty_values(self):
         package = "tests.dummyfiles.errorsmultiplevalues.methods_containing_multivalue_decorators_with_empty_strings"

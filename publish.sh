@@ -24,7 +24,7 @@ echo "checking if version=$api_version already exists"
 status_code=$(curl -L --write-out %{http_code} --silent --output /dev/null --header 'Accept: application/json' https://pypi.org/pypi/lusidfeatures/$api_version/json)
 
 if [[ "$status_code" -eq 200 ]] ; then
-    echo "### WARNING: lusidfeatures $api_version already exists, skipping publish ###"
+    echo "### WARNING: lusidfeatures $api_version already exists, skipping publish. Please update version ###"
     exit 0
 fi
 

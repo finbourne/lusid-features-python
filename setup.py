@@ -1,5 +1,7 @@
 from setuptools import setup
 
+from __version__ import __version__
+
 
 def readme():
     with open('README.md') as f:
@@ -8,7 +10,7 @@ def readme():
 
 setup(
     name='lusidfeature',
-    version='0.2.1',
+    version=__version__,
     description='This package will allow to run the main file and retrieve a list of decorated feature methods in a cls',
     long_description=readme(),
     long_description_content_type='text/markdown',

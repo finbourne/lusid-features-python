@@ -11,15 +11,14 @@ class ClassWithDecoratorsUsingMultipleFeatureValues(unittest.TestCase):
     def test_dummy_method_1(self):
         pass  # Empty for testing purposes
 
-    @lusid_feature("F2", "F5", "F6")
-    @classmethod
     @parameterized.expand(
         [
             ("test1", 1),
             ("test2", 2)
         ]
     )
-    def test_dummy_method_2(cls, test1, test2):
+    @lusid_feature("F2", "F5", "F6")
+    def test_dummy_method_2(self, test1, test2):
         pass  # Empty for testing purposes
 
     @lusid_feature("F7", "F8")
@@ -28,4 +27,3 @@ class ClassWithDecoratorsUsingMultipleFeatureValues(unittest.TestCase):
 
     def test_control_method(self):
         pass  # Empty for testing purposes
-
